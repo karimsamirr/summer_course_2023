@@ -1,0 +1,98 @@
+.mainAbout{
+    display: flex;
+    padding: 40px;
+    text-align: start;
+}
+.aboutClass{
+    margin: 50px;
+}
+.txtClass{
+    margin: 50px;
+}
+.btn_class{
+    background-color: black;
+    color: azure;
+    width: 200px;
+    height: 50px;
+}
+.skills_main{
+    padding: 90px;
+    background-color: darkslategrey;
+    color: wheat;
+
+}
+.mainfocus{
+    display: flex;
+   
+}
+.focus{
+    margin-top: 140px;
+    text-align: start;
+    padding-left: 200px;
+}
+#hoppy-btn{
+    background-color: gray;
+    border: 0px;
+    margin-top: 10px;
+    height: 30px;
+    border-radius: 0px;
+
+    
+    
+}
+.inputHoppy{
+    display:block ;
+    margin-top: 140px;
+    margin-left: 400px;
+}
+.portmain{
+    text-align: start;
+    padding:40px;
+
+
+}
+.portapp{
+    background-color:darkslategrey ;
+    color: wheat;
+    margin: 30px;
+    height: 300px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+.portofilocategories{
+    display: flex;
+}
+H3{
+    font-size: 30px;
+}
+.specialcolor{
+    background-color: rgb(102, 62, 45);
+    
+    color: wheat;
+    margin: 30px;
+    height: 300px;
+    width: 400px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 4px;
+}
+.mainfooter{
+    background-color: black;
+    color: white;
+    padding: 20px;
+    text-align: start;
+
+}
+.mangerfooter{
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+#inputvaled{
+    height: 25px;
+}
