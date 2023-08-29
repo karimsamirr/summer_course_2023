@@ -36,6 +36,7 @@ function App() {
         <Route path="/cart" element={<Cart />} />
         <Route path="/About" element={<Aboutnod />} />
         <Route path="/contact" element={<Contact />} />
+        <h1>hello</h1>
       </Routes>
       {/* <Home />
       <Help /> */}
