@@ -11,9 +11,10 @@ import Home from './component2/home';
 import Help from './component2/help';
 import Aboutnod from './component2/about';
 import Contact from './component2/contact';
-import Cart from './component2/cart';
+import CartComponent from './component2/cart';
 import NavBar from './component2/navbar';
 import Card from './component2/ProductCard';
+import  Favourite from './component2/redux/favouriteSlice';
 
 
 function App() {
@@ -33,10 +34,12 @@ function App() {
         <Route path="/" element={<Home/>} />
         <Route path="/help" element={<Help />} />
         <Route path='/Card' element={ <Card />}/>
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/cart" element={<CartComponent />} />
         <Route path="/About" element={<Aboutnod />} />
         <Route path="/contact" element={<Contact />} />
-        <h1>hello</h1>
+        <Route path="/favourite" element={<Favourite />} />
+
+      
       </Routes>
       {/* <Home />
       <Help /> */}

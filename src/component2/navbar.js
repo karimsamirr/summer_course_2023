@@ -5,7 +5,7 @@ import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink, Link } from "react-router-dom";
 
 function BasicExample() {
-  return (
+  return (<>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
         <Navbar.Brand href="#home">React-Bootstrap</Navbar.Brand>
@@ -17,14 +17,19 @@ function BasicExample() {
               <NavLink to="/" className='nav-link'>HOME</NavLink>
             <NavLink to="/Contact" className='nav-link'>contact</NavLink>
             <NavLink to="/Help" className='nav-link'>help</NavLink>
-            <NavLink to="/cart" className='nav-link'>cart</NavLink>
+            <NavLink to="/cart" className='nav-link'>favourite</NavLink>
             <NavLink to="/Card" className='nav-link'>product</NavLink>
+        
+
 
            
           </Nav>
         </Navbar.Collapse>
       </Container>
     </Navbar>
+    <button type="button" class="btn btn-primary float-end my-3" >data</button>
+    </>
+
   );
 }
 
