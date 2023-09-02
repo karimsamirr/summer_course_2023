@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useDispatch } from 'react-redux';
-import {addTodo} from './redux/favouriteSlice';
+import {addfav} from './redux/favouriteSlice';
 
 
 // import { useHistory } from 'react-router-dom';
@@ -75,7 +75,7 @@ function BasicExample() {
                     
                     <p className="text-muted mb-4">{item.overview}</p>
                     <span className="glyphicon glyphicon-heart-empty" ></span>
-                    <button onClick={()=>dispatch(addTodo(item))}>
+                    <button onClick={()=>dispatch(addfav(item))}>
                       fav
                     </button>
                   </div>

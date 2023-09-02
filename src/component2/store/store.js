@@ -1,7 +1,7 @@
 import {configureStore} from '@reduxjs/toolkit';
-import todoReducer from '../redux/favouriteSlice'
+import dataReducer from '../redux/favouriteSlice'
 
 const store=configureStore({
-    reducer:todoReducer,
+    reducer:dataReducer,
 });
 export default store;

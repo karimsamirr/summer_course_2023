@@ -2,29 +2,29 @@
 import { createSlice ,nanoid } from "@reduxjs/toolkit";
 
 const initialState ={
-  todos:[],
+  data:[],
 }
-export const todoSlice=createSlice({
-  name:'todo',
+export const dataSlice=createSlice({
+  name:'data',
   initialState,
   reducers:{
-    addTodo:(state,action)=>{
-      const todo={
-        id:nanoid(),
-
-        text:action.payload};
-      state.todos.todo.push(todo)
+    addfav:(state,action)=>{
+      const movie=action.payload;
+      if (!state.filter((fav) => fav.id === movie.id)){
+      
+      state.data.push(movie)
+      }
     },
-    removetodo:(state,action)=>{
-      state.todos=state.todos.filter((todo)=>
-      todo.id !==action.payload)
+    removefav:(state,action)=>{
+      state.data=state.data.filter((data)=>
+      data.id !==action.payload)
     }
   }
 
 })
 
-export const {addTodo,removetodo}=todoSlice.actions
-export default todoSlice.reducer
+export const {addfav,removefav}=dataSlice.actions
+export default dataSlice.reducer
 
 
 // const favoritesSlice = createSlice({

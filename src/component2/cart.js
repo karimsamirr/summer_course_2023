@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
 const imagePath = "https://image.tmdb.org/t/p/w500";
 const CartComponent = () => {
-  const favorites = useSelector((state) => state.todos);
+  const favorites = useSelector((state) => state.data);
   console.log(favorites);
   return (
     <>
