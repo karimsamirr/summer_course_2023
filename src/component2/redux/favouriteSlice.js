@@ -8,14 +8,14 @@ export const dataSlice=createSlice({
   name:'data',
   initialState,
   reducers:{
-    addfav:(state,action)=>{
+    addToFavorites:(state,action)=>{
       const movie=action.payload;
-      if (!state.filter((fav) => fav.id === movie.id)){
+      // if (!state.filter((fav) => fav.id === movie.id)){
       
       state.data.push(movie)
-      }
+      // }
     },
-    removefav:(state,action)=>{
+    removeFromFavorites:(state,action)=>{
       state.data=state.data.filter((data)=>
       data.id !==action.payload)
     }
@@ -23,7 +23,7 @@ export const dataSlice=createSlice({
 
 })
 
-export const {addfav,removefav}=dataSlice.actions
+export const {addToFavorites,removeFromFavorites}=dataSlice.actions
 export default dataSlice.reducer
 
 

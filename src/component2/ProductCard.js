@@ -2,8 +2,9 @@ import axios from 'axios';
 import { useEffect, useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
-import { useDispatch } from 'react-redux';
-import {addfav} from './redux/favouriteSlice';
+import { useDispatch ,useSelector } from 'react-redux';
+import {addToFavorites ,removeFromFavorites } from './redux/favouriteSlice';
+import { Link } from "react-router-dom";
 
 
 // import { useHistory } from 'react-router-dom';
@@ -11,7 +12,7 @@ import {addfav} from './redux/favouriteSlice';
 // const history = useHistory();
 
 
-function BasicExample() {
+export default function BasicExample() {
   const api= 'a4715176284f3fb3252194a08da9eb62';
   const imagePath = "https://image.tmdb.org/t/p/w500";
   const [alltv,setshow]=useState([]);
@@ -22,6 +23,7 @@ function BasicExample() {
     axios.get(`https://api.themoviedb.org/3/movie/popular`,{
       params:{
         api_key:api,
+        
       
         page:pagenxt,
       }
@@ -46,6 +48,19 @@ function BasicExample() {
     // history.push(`/Card/${nextpage}`);
   }
   const dispatch=useDispatch();
+  const favorites = useSelector((state) => state.favorites);
+
+  const isFavorite = favorites.some((item) => item.id === id);
+
+  const handleToggleFavorites = () => {
+    if (isFavorite) {
+      // Dispatch the action to remove the movie by id
+      dispatch(removeFromFavorites(id));
+    } else {
+      // If it's not a favorite, add it to favorites
+      dispatch(addToFavorites({ id, title, imgSrc }));
+    }
+  };
 
  
   return (
@@ -59,15 +74,21 @@ function BasicExample() {
             alltv.map((item) =>{
               return(
                 
+                
                     <>
-                     <div className="col-md-6 col-lg-4 col-xl-4">
+                    <div className="col-md-6 col-lg-4 col-xl-4">
+                   
+                     
+                     
               <div className="card text-black">
                 <i className="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
+                <Link to={`/details/${item.id}`} key={item.id}> 
                 <img
                   src={`${imagePath}${item.poster_path}`}
                   className="card-img-top cardImg"
                   alt="Apple Computer"
                 />
+                </Link>
                 <div className="card-body">
                   <div className="text-center">
                     <h5 className="card-title">{item.title}</h5>
@@ -75,7 +96,7 @@ function BasicExample() {
                     
                     <p className="text-muted mb-4">{item.overview}</p>
                     <span className="glyphicon glyphicon-heart-empty" ></span>
-                    <button onClick={()=>dispatch(addfav(item))}>
+                    <button onClick={handleToggleFavorites} className='btn '>
                       fav
                     </button>
                   </div>
@@ -86,7 +107,10 @@ function BasicExample() {
                   </div>
                 </div>
               </div>
+             
             </div>
+            
+            
                     </>)})}
     </div>
     </>
@@ -94,4 +118,4 @@ function BasicExample() {
   );
 }
 
-export default BasicExample;
+

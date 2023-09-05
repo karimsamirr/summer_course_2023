@@ -15,6 +15,7 @@ import CartComponent from './component2/cart';
 import NavBar from './component2/navbar';
 import Card from './component2/ProductCard';
 import  Favourite from './component2/redux/favouriteSlice';
+import Moviedetails from './component2/Moviedetails';
 
 
 function App() {
@@ -35,6 +36,7 @@ function App() {
         <Route path="/help" element={<Help />} />
         <Route path='/Card' element={ <Card />}/>
         <Route path="/cart" element={<CartComponent />} />
+        <Route path="/details/:id" element={<Moviedetails />} />
         <Route path="/About" element={<Aboutnod />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/favourite" element={<Favourite />} />
