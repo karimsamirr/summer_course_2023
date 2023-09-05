@@ -3,8 +3,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import { NavLink, Link } from "react-router-dom";
+import { useSelector } from "react-redux";
+
 
 function BasicExample() {
+  const counter=useSelector(state=>state.favorites);
+  
   return (<>
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -17,7 +21,8 @@ function BasicExample() {
               <NavLink to="/" className='nav-link'>HOME</NavLink>
             <NavLink to="/Contact" className='nav-link'>contact</NavLink>
             <NavLink to="/Help" className='nav-link'>help</NavLink>
-            <NavLink to="/cart" className='nav-link'>favourite</NavLink>
+            <NavLink to="/cart" className='nav-link'>favourite  </NavLink>
+            {counter.length}
             <NavLink to="/Card" className='nav-link'>product</NavLink>
         
 

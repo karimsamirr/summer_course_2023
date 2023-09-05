@@ -1,59 +1,38 @@
-import axios from 'axios';
-import { useEffect, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Card from 'react-bootstrap/Card';
-import { useDispatch ,useSelector } from 'react-redux';
-import {addToFavorites ,removeFromFavorites } from './redux/favouriteSlice';
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { addToFavorites, removeFromFavorites } from "./redux/favouriteSlice";
 import { Link } from "react-router-dom";
 
-
-// import { useHistory } from 'react-router-dom';
-
-// const history = useHistory();
-
+const api = "a4715176284f3fb3252194a08da9eb62";
+const imagePath = "https://image.tmdb.org/t/p/w500";
 
 export default function BasicExample() {
-  const api= 'a4715176284f3fb3252194a08da9eb62';
-  const imagePath = "https://image.tmdb.org/t/p/w500";
-  const [alltv,setshow]=useState([]);
-  const [pagenxt,setpagenxt]=useState(1);
-  
-
-  useEffect(()=>{
-    axios.get(`https://api.themoviedb.org/3/movie/popular`,{
-      params:{
-        api_key:api,
-        
-      
-        page:pagenxt,
-      }
-    }) .then((respone)=>{
-      console.log(respone.data.page);
-        console.log(respone.data.results);
-        setshow(respone.data.results);
-    })
-    .catch((err) =>{});
-  },[pagenxt])
-
-  const nxt=()=>{
-    let newPg=pagenxt+1
-    setpagenxt(newPg)
-    // const nextpage = parseInt(pagenxt) + 1;
-    // history.push(`/Card/${nextpage}`);
-  }
-  const prv=()=>{
-    let newPg=pagenxt-1
-    setpagenxt(newPg)
-    // const nextpage = parseInt(pagenxt) + 1;
-    // history.push(`/Card/${nextpage}`);
-  }
-  const dispatch=useDispatch();
+  const [alltv, setshow] = useState([]);
+  const [pagenxt, setpagenxt] = useState(1);
+  const dispatch = useDispatch();
   const favorites = useSelector((state) => state.favorites);
 
-  const isFavorite = favorites.some((item) => item.id === id);
+  useEffect(() => {
+    axios
+      .get(`https://api.themoviedb.org/3/movie/popular`, {
+        params: {
+          api_key: api,
+          page: pagenxt,
+        },
+      })
+      .then((response) => {
+        console.log(response.data.page);
+        console.log(response.data.results);
+        setshow(response.data.results);
+      })
+      .catch((err) => {});
+  }, [pagenxt]);
 
-  const handleToggleFavorites = () => {
-    if (isFavorite) {
+  const isFavorite = (id) => favorites.some((item) => item.id === id);
+
+  const handleToggleFavorites = (id, title, imgSrc) => {
+    if (isFavorite(id)) {
       // Dispatch the action to remove the movie by id
       dispatch(removeFromFavorites(id));
     } else {
@@ -62,60 +41,85 @@ export default function BasicExample() {
     }
   };
 
- 
+  const handleNextPage = () => {
+    setpagenxt((prevPage) => prevPage + 1);
+  };
+
+  const handlePreviousPage = () => {
+    if (pagenxt > 1) {
+      setpagenxt((prevPage) => prevPage - 1);
+    }
+  };
+
   return (
-    <> 
-           <button type="button" class="btn btn-primary float-end my-3" 
-          onClick={()=>{nxt()}}>Next</button>
-           <button type="button" class="btn btn-primary float-end my-3" 
-          onClick={()=>{prv()}}>prvious</button>
-    <div className="row">
-        {
-            alltv.map((item) =>{
-              return(
-                
-                
-                    <>
-                    <div className="col-md-6 col-lg-4 col-xl-4">
-                   
-                     
-                     
+    <>
+      <button
+        type="button"
+        className="btn btn-primary float-end my-3"
+        onClick={handleNextPage}
+      >
+        Next
+      </button>
+      <button
+        type="button"
+        className="btn btn-primary float-end my-3"
+        onClick={handlePreviousPage}
+      >
+        Previous
+      </button>
+      <div className="row">
+        {alltv.map((item) => {
+          const {
+            id,
+            title,
+            poster_path: posterPath,
+            overview,
+            first_air_date: firstAirDate,
+          } = item;
+
+          return (
+            <div className="col-md-6 col-lg-4 col-xl-4" key={id}>
               <div className="card text-black">
                 <i className="fab fa-apple fa-lg pt-3 pb-1 px-3"></i>
-                <Link to={`/details/${item.id}`} key={item.id}> 
-                <img
-                  src={`${imagePath}${item.poster_path}`}
-                  className="card-img-top cardImg"
-                  alt="Apple Computer"
-                />
+                <Link to={`/details/${id}`}>
+                  <img
+                    src={`${imagePath}${posterPath}`}
+                    className="card-img-top cardImg"
+                    
+                  />
                 </Link>
                 <div className="card-body">
                   <div className="text-center">
-                    <h5 className="card-title">{item.title}</h5>
-                    
-                    
-                    <p className="text-muted mb-4">{item.overview}</p>
-                    <span className="glyphicon glyphicon-heart-empty" ></span>
-                    <button onClick={handleToggleFavorites} className='btn '>
-                      fav
+                    <h5 className="card-title">{title}</h5>
+                    <p className="text-muted mb-4">{overview}</p>
+                    <button
+                      onClick={() =>
+                        handleToggleFavorites(
+                          id,
+                          title,
+                         `${imagePath}${posterPath}`
+                        )
+                      }
+                      className={`btn ${
+                        isFavorite(id) ? "btn-danger" : "btn-primary"
+                      }`}
+                    >
+                      {isFavorite(id)
+                        ? "Remove from Favorites"
+                        : "Add to Favorites"}
                     </button>
                   </div>
                   <div>
                     <div className="d-flex justify-content-between">
-                      <span>{item.first_air_date}</span>
+                      <span>{firstAirDate}</span>
                     </div>
                   </div>
                 </div>
               </div>
-             
             </div>
-            
-            
-                    </>)})}
-    </div>
+          );
+        })}
+      </div>
     </>
-
   );
 }
-
-

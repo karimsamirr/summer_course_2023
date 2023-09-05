@@ -1,30 +1,22 @@
+// redux/favoritesSlice.js
 
-import { createSlice ,nanoid } from "@reduxjs/toolkit";
+import { createSlice } from '@reduxjs/toolkit';
 
-const initialState ={
-  data:[],
-}
-export const dataSlice=createSlice({
-  name:'data',
-  initialState,
-  reducers:{
-    addToFavorites:(state,action)=>{
-      const movie=action.payload;
-      // if (!state.filter((fav) => fav.id === movie.id)){
-      
-      state.data.push(movie)
-      // }
+const favoritesSlice = createSlice({
+  name: 'favorites',
+  initialState: [],
+  reducers: {
+    addToFavorites: (state, action) => {
+      state.push(action.payload);
     },
-    removeFromFavorites:(state,action)=>{
-      state.data=state.data.filter((data)=>
-      data.id !==action.payload)
-    }
-  }
+    removeFromFavorites: (state, action) => {
+      return state.filter((item) => item.id !== action.payload);
+    },
+  },
+});
 
-})
-
-export const {addToFavorites,removeFromFavorites}=dataSlice.actions
-export default dataSlice.reducer
+export const { addToFavorites, removeFromFavorites } = favoritesSlice.actions;
+export default favoritesSlice.reducer;
 
 
 // const favoritesSlice = createSlice({
@@ -37,7 +29,7 @@ export default dataSlice.reducer
 //         state.push(movie);
 //       }
 //     },
-    
+
 //   },
 // });
 
